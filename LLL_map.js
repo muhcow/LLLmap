@@ -1,78 +1,6 @@
+// code is from
 //https://stackoverflow.com/questions/12661124/how-to-apply-hovering-on-html-area-tag
 
-
-//function that puts the canvas over the map iamge
-function initCanvas(){
-
-    //get the map image
-    var map = document.getElementById("myMap");
-
-    var x,y, w,h;
-
-    //get the coordinates and height and width of the image
-    x = map.offsetLeft;
-    y = map.offsetTop;
-    w = map.clientWidth;
-    h = map.clientHeight;
-   
-    /*
-    console.log(x);
-    console.log(y);
-    console.log(w);
-    console.log(h);
-    */
-
-    //idk wut this is for tbh
-    //var mapParent = map.parentNode;
-    var newCanvas = document.getElementById("myCanvas");
-    //mapParent.appendChild(newCanvas);
-
-    // place the canvas in front of the image
-    //zIndex = priority in stack/higher priority means its at the front
-    newCanvas.style.zIndex = 1;
-
-    // position it over the image
-    newCanvas.style.left = x+'px';
-    newCanvas.style.top = y+'px';
-
-    // make same size as the image
-    newCanvas.setAttribute('width', w+'px');
-    newCanvas.setAttribute('height', h+'px');
-
-    // get it's context for drawing stuff and using canvas context methods
-    var hdc = newCanvas.getContext("2d");
-
-    // set the 'default' values for the colour/width of fill/stroke operations
-    hdc.fillStyle = 'red';
-    hdc.strokeStyle = 'red';
-    hdc.lineWidth = 2;
-
-}
-
-//function that is called on mouse hover
-//obtain coord string and shape type
-//call draw shapes functions
-function myHover(element){
-    var hoveredElement = element;
-    var coordStr = hoveredElement.getAttribute('coords');
-    var areaType = hoveredElement.getAttribute('shape');
-    element.style.transform = element.style.transform.replace('scale(' + "1" + ')', 'scale(' + "5" + ')');
-
-    switch (areaType){
-        case "rect":{
-
-        }
-
-        case "circle":{
-
-        }
-
-    }
-
-    //console.log(areaType);
-    //console.log(coordStr);
-
-}
 
 //gets called by moveMagnifier
 //function returns the cursor position as a string
@@ -81,9 +9,6 @@ function getCursorPos(e) {
     var boundingRectCoords, x=0, y=0;
     //use e f it exists otherwise use window.event
     e = e || window.event;
-
-    console.log(e);
-    console.log(window.event)
 
     //get the image object in this case its our map
     var img = document.getElementById("myMap");
@@ -116,7 +41,7 @@ function moveMagnifier(e, zoom) {
     img = document.getElementById("myMap");
 
     /*prevent any other actions that may occur when moving over the image*/
-    e.preventDefault;
+   //e.preventDefault;
 
     /*get the cursor's x and y positions:*/
     pos = getCursorPos(e);
@@ -124,12 +49,9 @@ function moveMagnifier(e, zoom) {
     x = pos.x;
     y = pos.y;
 
-
-    //console.log(e);
-
-    console.log(x);
-    console.log(y);
-    console.log(zoom);
+    //console.log(x);
+    //console.log(y);
+    //console.log(zoom);
 
     bw = 3;
     w = glass.offsetWidth / 2;
@@ -147,7 +69,6 @@ function moveMagnifier(e, zoom) {
 
     /*display what the magnifier glass "sees":*/
     glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
-
 }
 
 //make the magnifying glass
@@ -165,10 +86,11 @@ function magnify(zoom) {
   //console.log(img.parentElement);
 
   /*set background properties for the magnifier glass:*/
-  glass.style.backgroundImage = "url('" + img.src + "')";
+  glass.style.backgroundImage = "url('" + "new-lll-asia-middle-east-map-november-2018_orig copy.jpg" + "')";
   glass.style.backgroundRepeat = "no-repeat";
   glass.style.backgroundPosition = "-" + (glass.pageX) + "px -" + (glass.pageY) + "px";
   glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+  glass.style.zIndex = 2;
 
   
 
@@ -180,17 +102,50 @@ function magnify(zoom) {
   //for some reason it doesn't work when you put in function parameters which is super weird
   glass.addEventListener("mousemove", function(e) { moveMagnifier(e, zoom); });
   img.addEventListener("mousemove", function(e) { moveMagnifier(e, zoom); });
+  var useMap = document.getElementById("myForRealMap");
+  useMap.addEventListener("mousemove", function(e) { moveMagnifier(e, zoom); });
+  
 
   //debug stuff
-  glass.style.left = ("170")+("px");
-  glass.style.top = ("120")+("px");
+  //glass.style.left = ("170")+("px");
+  //glass.style.top = ("120")+("px");
 }
 
+//function that finds link in area and takes you to it
+function goToLink() {
+    console.log("yeeep boi");
+}
 
+function activateAreas(){
+    var newArea = document.getElementById("china");
+    newArea.addEventListener("mousedown", goToLink);
+   // console.log(newArea.parentNode.parentNode.parentNode);
+}
 
 window.onload = function() {
-   // initCanvas();
-   magnify(3);
    
+    magnify(3);
+   
+    /*
+    getZindex("testArea");
+    getZindex("myGlass")
+    getZindex("myMap");
+    getZindex("myForRealMap");
+    var test = document.getElementById("testArea");
+    console.log(test);
+    */
+
   };
+
+  function areaActive(){
+      console.log("yeeep boi");
+  }
+
+  function getZindex(elementID){
+    var test = document.getElementById(elementID);
+    var daZIndex = window.getComputedStyle(test,null).getPropertyValue("z-index")
+    console.log (elementID + " : " + daZIndex);
+    //test.style.zIndex = 2;
+    console.log (elementID + " : " + daZIndex);
+  }
 

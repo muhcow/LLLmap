@@ -15,25 +15,24 @@ Map feature for LLL
 
 <body>
 
- <!--
-<canvas id="myCanvas"></canvas>
--->
-
 <img id="myMap" src="new-lll-asia-middle-east-map-november-2018_orig.jpg" alt="lll_map" usemap="#LLLmap">
 
-<map name="LLLmap" >
+<img id="copyMap" src="new-lll-asia-middle-east-map-november-2018_orig copy.jpg" alt="lll_map_copy">
 
-        <div class = "areas">
+<map id="myForRealMap" name="LLLmap" >
 
-        <area shape="circle" coords="820,310,40" alt="China" href="http://www.muruhui.org/hyxx.asp" target="_blank" >
+       
+
+        <area id="china" shape="circle" coords="820,310,40" alt="China" href="http://www.muruhui.org/hyxx.asp" target="_blank" onmouseover="areaActive()" >
         <area shape="circle" coords="895,300,5" alt="South Korea" href="https://www.llli.org/la-leche-league-south-korea/" target="_blank">
         <area shape="rect" coords="915,265,934,321" alt="Japan" href="https://llljapan.org/group_index.html" target="_blank">
         <area shape="circle" coords="884,353,8" alt="Taiwan" href="https://www.llli.org/la-leche-league-taiwan/" target="_blank">
         <area shape="circle" coords="871,363,3" alt="Hong Kong" href="https://www.lll-hk.org/meetings.html" target="_blank">
         <area shape="circle" coords="977,408,3" alt="Guam" href="http://www.lllofguam.org/find-an-lll-meeting/" target="_blank">
         <area shape="rect" coords="486,300,526,358" alt="Algeria" href="https://www.llli.org/la-leche-league-algeria/" target="_blank"> 
-                
-        </div>
+        <area id="testArea" shape="circle" coords="110,100,200" alt="Guam" href="http://www.lllofguam.org/find-an-lll-meeting/" target="_blank">
+
+      
 
 </map>
 
